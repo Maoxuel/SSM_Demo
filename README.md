@@ -30,9 +30,8 @@ SSM整合CRUD：
 			c3po/druid
 			mysql-connector-java
 		其他:
-			jstl Servlet-api junit
-		mybatis generator逆向工程根据数据库字段自动生成实体bean和对应mapper.xml
-    		mybatis-generator-core
+			jstl,Servlet-api,unit,mybatis-generator-core
+			MyBatis Generator逆向工程根据数据库中单表字段自动生成实体bean和对应mapper.xml
 
 	3.引入bootstrap前端框架:
 		使用参考Bootstrap官方文档
@@ -41,8 +40,7 @@ SSM整合CRUD：
 		springmvc.xml
 		applicationContext.xml:
 		mybatis.xml
-		MBG.xml
-			使用mybatis逆向工程生成对应的bean以及mapper
+		MBG.xml：用mybatis逆向工程生成对应的bean以及mapper
 	5.测试mapper
 		根据需要，有选择的增加或修改mapper中的sql语句操作
 		联表查询等等
