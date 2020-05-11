@@ -47,16 +47,33 @@ SSM整合CRUD：
 
 测试dao层
 ------
-		    推荐spring项目就可以用spring的单元测试，会自动注入所需要的组件
-		    1.导入springTest模块
-		    2.@RunWith(SpringJUnit4ClassRunner.class)
-		    使用@ContextConfiguration指定spring配置文件的位置
-		    3.直接autowired要使用的组件即可
-
-		批量操作
-			spring的applicationContext.xml中配置一个可以批量操作的SQLSession
-		    <bean class="org.mybatis.spring.SqlSessionTemplate" name="sqlSession">
-		        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
-		        <constructor-arg name="executorType" value="BATCH"/>
-		    </bean>
+    推荐spring项目就可以用spring的单元测试，会自动注入所需要的组件
+    1.导入springTest模块
+    2.@RunWith(SpringJUnit4ClassRunner.class)
+    使用@ContextConfiguration指定spring配置文件的位置
+    3.直接autowired要使用的组件即可
+	
+	批量操作
+	spring的applicationContext.xml中配置一个可以批量操作的SQLSession
+    <bean class="org.mybatis.spring.SqlSessionTemplate" name="sqlSession">
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	<constructor-arg name="executorType" value="BATCH"/>
+    </bean>
 		    然后Autowires注入一个sqlsession对象，获取一个mapper，循环批量插入等操作
+		    
+Page Helper插件
+------
+	<!--引入pageHelper分页插件jar包-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+	
+	<!--在Mybatis的xml文件中配置pageHelper分页插件拦截器-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--分页参数合理化-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
