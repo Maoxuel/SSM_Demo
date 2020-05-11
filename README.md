@@ -63,6 +63,7 @@ SSM整合CRUD：
 		    
 Page Helper插件
 ------
+	1.配置
 	<!--引入pageHelper分页插件jar包-->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
@@ -77,3 +78,20 @@ Page Helper插件
             <property name="reasonable" value="true"/>
         </plugin>
     </plugins>
+    
+    
+    2.使用
+    @RequestMapping("/emps")
+    public String getEmps(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+        //这是一个分页查询
+        //引入PageHelper分页插件
+        //在查询之前只需要调用,传入页码和大小
+        PageHelper.startPage(pn, 5);
+        //startPage后面紧跟的查询就是个分页查询
+        List<Employee> list = employeeService.getAll();
+        //使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了
+        //它封装了详细的分页的信息，包括查询出的结果,传入连续显示的页数
+        PageInfo page = new PageInfo(list, 5);
+        model.addAttribute("pageInfo", page);
+        return "list";
+    }
